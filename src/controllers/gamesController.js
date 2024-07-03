@@ -19,7 +19,7 @@ const getGameId = (req,res)=> {
 
 const createGame = (req,res)=> {
     const {titulo, consola, genero} = req.body;
-    const sql = 'insert into games (id,titulo, consola, genero) values(?,?,?)';
+    const sql = 'insert into games (titulo, consola, genero) values(?,?,?)';
     db.query(sql,[titulo, consola, genero],(err,result)=>{
         if(err)throw err;
         res.json({message:'game creado', gameid: result.insertId});
@@ -30,7 +30,7 @@ const updateGame = (req,res)=> {
     const {id} = req.params;
     const {titulo, consola, genero} = req.body;
     const sql = 'update games set titulo = ?, consola = ?, genero = ? where id = ?';
-    db.query(sql,[id,titulo, consola, genero],(err,results)=>{
+    db.query(sql,[id,titulo, consola, genero],(err,result)=>{
         if(err)throw err;
         res.json({message: 'game actualizado'});
     });
